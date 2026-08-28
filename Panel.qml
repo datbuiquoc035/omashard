@@ -127,7 +127,7 @@ Panel {
     id: clock
     precision: SystemClock.Minutes
     onDateChanged: {
-      if (hostWidget && hostWidget.settleSchedule) hostWidget.settleSchedule(null)
+      if (hostWidget && hostWidget.fetchData) hostWidget.fetchData()
       root.subtitle = Subtitles.getRandomSubtitle()
     }
   }
@@ -149,7 +149,7 @@ Panel {
       onCloseRequested: root.close()
       onTabRequested: function(direction) { root.switchPanel(direction) }
       onActivateRequested: {
-        if (root.todayShard && hostWidget && hostWidget.settleSchedule) hostWidget.settleSchedule(null)
+        if (root.todayShard && hostWidget && hostWidget.fetchData) hostWidget.fetchData()
       }
 
       Flickable {
