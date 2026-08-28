@@ -57,3 +57,17 @@ game day actually rolls over — not at the local midnight.
   the current LA game day.
 - Middle-click and the IPC `refresh` force a live fetch (which updates the cache).
 - If a fetch fails, the last-known-good cached data stays on screen.
+
+### Installation
+The plugin is still in development, but you can test it out by following these instructions:
+- Requirements:
+  - Omarchy Quattro (operating system)
+  - Python (latest)
+ 
+- Instructions:
+  1. clone the repo:  ```git clone https://github.com/datbuiquoc035/omashard.git```
+  2. copy the directory to  ```/.config/omarchy/plugins/```
+  3. restart the shell
+
+### License
+MIT
