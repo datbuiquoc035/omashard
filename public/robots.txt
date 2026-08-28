@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+User-agent: Googlebot-Image
+Disallow: /infographics
+Disallow: /ext
+Disallow: /emojis
+Disallow: /backgrounds
+Allow: /icons
+Allow: /favicon.ico
