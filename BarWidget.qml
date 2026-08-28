@@ -242,6 +242,8 @@ BarWidget {
     cacheFile.reload()
   }
 
+  property string lastStderr: ""
+
   Process {
     id: fetchProc
     command: ["python3", root.shardScriptPath, root.todayDateKey()]
@@ -250,7 +252,7 @@ BarWidget {
       onStreamFinished: {
         var raw = String(text || "").trim()
         if (!raw) {
-          root.fetchError = "Empty response from shard details script"
+          if (!root.fetchError) root.fetchError = root.lastStderr ? root.lastStderr : "Empty response from shard details script"
           root.settleWithFallback(null)
           return
         }
@@ -274,10 +276,24 @@ BarWidget {
         root.settleSchedule(payload)
       }
     }
+    stderr: StdioCollector {
+      waitForEnd: true
+      onStreamFinished: {
+        var rawErr = String(text || "").trim()
+        if (rawErr) {
+          var match = rawErr.match(/Error:\s*(.*)/i)
+          root.lastStderr = match ? match[1] : rawErr
+        } else {
+          root.lastStderr = ""
+        }
+      }
+    }
     onExited: function(exitCode) {
       root.loading = false
-      if (exitCode !== 0 && !root.fetchError) {
-        root.fetchError = "Shard details script failed"
+      if (exitCode !== 0) {
+        if (!root.fetchError) {
+          root.fetchError = root.lastStderr ? root.lastStderr : "Shard details script failed"
+        }
         root.settleWithFallback(null)
       }
     }

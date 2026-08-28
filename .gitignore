@@ -1,0 +1,9 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS / Editor artifacts
+.DS_Store
+*.swp
+*.tmp

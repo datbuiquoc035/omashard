@@ -22,7 +22,7 @@ function daysFromMonthStart(year, month, firstDay) {
 function secondSundayUtc(year, month, hour, minute) {
   var monthStart = new Date(Date.UTC(year, month, 1))
   var dow = monthStart.getUTCDay()
-  var day = 14 - dow
+  var day = 8 + ((7 - dow) % 7)
   return Date.UTC(year, month, day, hour, minute)
 }
 
@@ -46,29 +46,29 @@ var REALMS = [
   "Hidden Forest",
   "Valley of Triumph",
   "Golden Wasteland",
-  "Vault of Light",
+  "Vault of Knowledge",
 ]
 var REALM_KEYS = ["prairie", "forest", "valley", "wasteland", "vault"]
 
 var REALM_MAP_NAMES = {
   "prairie.butterfly": "Butterfly Fields",
-  "prairie.village": "Prairie Village",
-  "prairie.cave": "Prairie Cave",
-  "prairie.bird": "Bird's Nest",
-  "prairie.island": "Prairie Islands",
+  "prairie.village": "Village Islands",
+  "prairie.cave": "Cave",
+  "prairie.bird": "Bird Nest",
+  "prairie.island": "Sanctuary Island",
   "forest.brook": "Brook",
   "forest.boneyard": "Boneyard",
-  "forest.end": "Forest End",
+  "forest.end": "Forest Garden",
   "forest.tree": "Treehouse",
-  "forest.sunny": "Sunny Forest",
-  "valley.rink": "Coliseum",
-  "valley.dreams": "Dreams",
+  "forest.sunny": "Elevated Clearing",
+  "valley.rink": "Ice Rink",
+  "valley.dreams": "Village of Dreams",
   "valley.hermit": "Hermit Valley",
   "wasteland.temple": "Broken Temple",
   "wasteland.battlefield": "Battlefield",
   "wasteland.graveyard": "Graveyard",
   "wasteland.crab": "Crab Field",
-  "wasteland.ark": "Ark",
+  "wasteland.ark": "Forgotten Ark",
   "vault.starlight": "Starlight Desert",
   "vault.jelly": "Jellyfish Cove",
 }
@@ -282,6 +282,9 @@ if (typeof module !== "undefined") {
     BASE_REWARDS: BASE_REWARDS,
     RED_REWARDS: RED_REWARDS,
     VARIANTS: VARIANTS,
+    laOffsetMinutes: laOffsetMinutes,
+    secondSundayUtc: secondSundayUtc,
+    firstSundayUtc: firstSundayUtc,
     groupIndexForDay: groupIndexForDay,
     realmIndexForDay: realmIndexForDay,
     isRedDay: isRedDay,

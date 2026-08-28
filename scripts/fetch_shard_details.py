@@ -163,18 +163,27 @@ def resolve_shard_details(target_date: date, daily_config: dict[str, Any] | None
         result["message"] = "No shard eruption is scheduled for this date."
         return result
 
-    midnight = datetime.combine(target_date, datetime.min.time(), tzinfo=get_local_tz())
+    la_tz = ZoneInfo("America/Los_Angeles")
+    local_tz = get_local_tz()
+    midnight_la = datetime.combine(target_date, datetime.min.time(), tzinfo=la_tz)
     offset_hours, offset_minutes = schedule["offset"]
-    first_start = add_elapsed(midnight, timedelta(hours=offset_hours, minutes=offset_minutes))
-    if weekday == 7 and midnight.dst() != first_start.dst():
-        first_start = add_elapsed(first_start, timedelta(hours=-1 if first_start.dst() else 1))
+    first_start_la = midnight_la + timedelta(hours=offset_hours, minutes=offset_minutes)
+    if weekday == 7 and midnight_la.dst() != first_start_la.dst():
+        first_start_la += timedelta(hours=-1 if first_start_la.dst() else 1)
 
     occurrences = []
     for number in range(3):
-        start = add_elapsed(first_start, timedelta(hours=schedule["interval_hours"] * number))
-        landing = add_elapsed(start, timedelta(minutes=8, seconds=40))
-        end = add_elapsed(start, timedelta(hours=4))
-        occurrences.append({"number": number + 1, "start": start.isoformat(), "landing": landing.isoformat(), "end": end.isoformat()})
+        start_la = first_start_la + timedelta(hours=schedule["interval_hours"] * number)
+        landing_la = start_la + timedelta(minutes=8, seconds=40)
+        end_la = start_la + timedelta(hours=4)
+        occurrences.append(
+            {
+                "number": number + 1,
+                "start": start_la.astimezone(local_tz).isoformat(),
+                "landing": landing_la.astimezone(local_tz).isoformat(),
+                "end": end_la.astimezone(local_tz).isoformat(),
+            }
+        )
 
     result.update(
         {
