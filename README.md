@@ -45,9 +45,3 @@ Mirrors the client-side schedule logic from the sky-shards website.
 - **Panel** (left click): today's shard at a glance + eruption windows + upcoming days
 - Right-click cycles label format; middle-click force-refreshes
 - Auto-refreshes every 30 min; retries on failure; rolls over at midnight
-
-## API
-The remote endpoint is hardcoded to:
-```
-https://sky-shardfig.plutoy.top/all.json
-```
