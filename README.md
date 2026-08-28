@@ -45,3 +45,15 @@ Mirrors the client-side schedule logic from the sky-shards website.
 - **Panel** (left click): today's shard at a glance + eruption windows + upcoming days
 - Right-click cycles label format; middle-click force-refreshes
 - Auto-refreshes every 30 min; retries on failure; rolls over at midnight
+
+### Caching
+The network (API) is hit at most **once per game day**. The script's output is
+cached to disk at `~/.local/state/omarchy/qdot.omashard/shards.json` (the same
+plain-path convention as the notifications service) and keyed to the game's
+home timezone (**midnight America/Los_Angeles**), so the cache resets when the
+game day actually rolls over — not at the local midnight.
+
+- On startup the widget loads the cache first and skips the network if it's for
+  the current LA game day.
+- Middle-click and the IPC `refresh` force a live fetch (which updates the cache).
+- If a fetch fails, the last-known-good cached data stays on screen.
