@@ -21,7 +21,7 @@ qdot.omashard/
 ## How it works
 
 ### Data source
-The **API** (`https://sky-shardfig.plutoy.top/all.json`) is the sole data source.
+Source: `https://github.com/PlutoyDev/sky-shards`
 It provides daily overrides (realm, map, color, memory, etc.).
 The schedule computation (realm rotation, map groups, eruption offsets, DST handling)
 is bundled directly in the code — no additional API calls are needed beyond the override fetch.
