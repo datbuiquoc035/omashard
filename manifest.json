@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+    "id": "qdot.omashard",
+  "name": "OmaShard",
+  "version": "1.0.0",
+  "author": "qdot",
+  "description": "Sky: Children of the Light shard eruptions — type, location, and landing times",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "OmaShard",
+    "description": "Shows today's Sky shard: color, realm, map, reward, and eruption windows",
+    "category": "Games",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.clock"
+  }
+}
