@@ -14,7 +14,7 @@ upcoming days.
 ## Install
 
 ```bash
-omarchy plugin install https://github.com/datbuiquoc035/omashard.git
+omarchy plugin install https://github.com/datbuiquoc035/omashard.git --enable
 ```
 
 ## Update
