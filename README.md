@@ -13,40 +13,20 @@ upcoming days.
 
 ## Install
 
-Install from this checkout with the bundled local installer:
+```bash
+omarchy plugin install https://github.com/datbuiquoc035/omashard.git
+```
+
+## Update
 
 ```bash
-scripts/install.sh            # install and place the widget next to the clock
-scripts/install.sh --section left   # choose a different bar section
-scripts/install.sh --no-enable      # copy the plugin but leave it disabled
-scripts/install.sh --remove         # uninstall
+omarchy plugin update qdot.omashard
 ```
 
-What it does:
+## Remove
 
-1. Copies the plugin into `~/.config/omarchy/plugins/qdot.omashard/`
-2. Validates it against the Omarchy plugin schema
-3. Rescans the shell so the new plugin is discovered
-4. Enables it as a bar widget (and places it in the chosen section)
-
-You can also install it as a git plugin later with `omarchy plugin add`, but the
-local script above is the recommended path while this repo isn't published.
-
-## Structure
-
-```
-qdot.omashard/
-├── manifest.json                  # Omarchy plugin manifest (id: qdot.omashard)
-├── BarWidget.qml                  # Bar widget — fetches today's shard, shows label + panel
-├── Panel.qml                      # Shard info popup (today + upcoming eruptions)
-├── ShardModel.js                  # Pure schedule math (no dependencies)
-├── Subtitles.js                   # Rotating subtitle lines for the panel
-├── assets/
-│   └── tgc-logo.png               # Sky-shards logo
-├── scripts/
-│   ├── fetch_shard_details.py     # Python script: fetches live overrides + computes schedule
-│   └── install.sh                 # Local installer (copy → validate → enable)
-└── README.md                      # This file
+```bash
+omarchy plugin remove qdot.omashard
 ```
 
 ## How it works
